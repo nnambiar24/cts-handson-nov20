@@ -7,9 +7,10 @@ public class ThreadDemo {
 		
 		Counter counter= new Counter();
 		
-		Thread t1=new Thread(counter);
-		Thread t2=new Thread(counter);
+		Thread t1=new Thread(counter,"A");// giving thread name using another constructer
+		Thread t2=new Thread(counter,"B");
 		
+	
 		t1.start();
 		t2.start();
 		
