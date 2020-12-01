@@ -1,19 +1,22 @@
 package com.org;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+@Controller
 public class EmployeeController {
 
 	@Autowired
 	private EmployeeService empservice;
-	
+
 	@RequestMapping(value="/time",method=RequestMethod.GET)
 	public ModelAndView viewDateTime() {
-		ModelAndView mav=new ModelAndView("hello","msg",empservice.getDateTiime());
+		ModelAndView mav=new ModelAndView("hello","msg",empservice.fetchDateTimeService());
 		return mav;
 	}
 	
@@ -62,4 +65,20 @@ public class EmployeeController {
 		ModelAndView mav=new ModelAndView("hello","msg",empservice.getEmployeeDetailsById(id));
 		return mav;
 	}
+	
+	@RequestMapping(value = "/multipleKeys", method = RequestMethod.GET)
+	public ModelAndView fetchMulitpleKeys() {
+		
+		ModelMap mm= new ModelMap();
+		
+		mm.put("title", "Employee List");
+		mm.put("employeeObject", new Employee(107,"John",35000));
+		mm.put("employeeList", empservice.getAllEmployee());
+		
+		ModelAndView mav= new ModelAndView("display","model",mm);
+		
+		return mav;
+	}
+
+
 }

@@ -4,14 +4,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class EmployeeService {
+@Service
+public class EmployeeServiceImpl implements EmployeeService{
 
 	@Autowired
 	private EmployeeDao empdao;
 	
-	public String getDateTiime() {
-		return empdao.fetchTime();
+	public String fetchDateTimeService() {
+		return empdao.fetchDateTime();
+	}
+	
+	public List<Employee> getAllEmployeesNamesInReverseOrder() {
+		List<Employee> list = empdao.fetchAllEmployee().stream()
+		.sorted((e1, e2) -> e2.getName().compareTo(e1.getName()))
+		.collect(Collectors.toList());
+		return list;
 	}
 	
 	public List<Employee> getAllEmployee(){
@@ -51,4 +60,6 @@ public class EmployeeService {
 	public Employee getEmployeeDetailsById(int id){
 		return empdao.fetchEmployeeById(id);
 	}
+
+
 }
