@@ -1,0 +1,24 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /Banking-App
+    
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cts_db
+    username: root
+    password: Achan$098
+    
+  
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+  
+  
+  
